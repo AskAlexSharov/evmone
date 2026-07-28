@@ -43,7 +43,7 @@ std::optional<address> recover(const bytes& txbytes)
 {
     const auto tx = state::decode_transaction(txbytes);
     EXPECT_TRUE(tx.has_value());
-    return tx.has_value() ? state::recover_sender(*tx, txbytes) : std::nullopt;
+    return state::recover_sender(tx.value(), txbytes);
 }
 
 /// Compares all decoded fields of two transactions (sender is not recovered by the decoder).
